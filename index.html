@@ -1,8 +1,6 @@
 <html>
-
 <head>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
-
   <style>
     body {
       background-color: black;
@@ -11,86 +9,210 @@
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
-    }
-
-    .text {
-      color: white;
-      font-family: "DotGothic16", sans-serif;
-      font-size: 200%;
-    }
-
-    .pane {
-      display: block;
-      margin-left: 40%;
-      align-items: centre;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin-top: 17%;
-    }
-
-    .loading_container {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-top: 4%;
-    }
-
-    .loading_bar {
-      height: 30px;
-      background-color: #2b2b2b;
-      align-items: center;
-      display: flex;
-      width: 30%;
-      border-radius: 5px;
       overflow: hidden;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      perspective: 400px;
+      font-family: "DotGothic16", sans-serif;
     }
 
-    .loading_line {
-      background: #007300;
-      background: linear-gradient(270deg, rgba(0, 115, 0, 1) 0%, rgba(0, 87, 36, 1) 50%);
-      height: 100%;
-      margin-left: 0;
-      width: 91%;
-    <!-- Проценты полоса  --!>
-      transition: width 0.3s ease;
+    .container {
+      position: relative;
+      height: 100vh;
+      width: 100%;
     }
 
-    .percent {
+    .button-container {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    .open-button {
       color: white;
       font-family: "DotGothic16", sans-serif;
-      font-size: 180%;
-      min-width: 60px;
+      font-size: 150%;
+      text-decoration: none;
+      border: 2px solid white;
+      padding: 15px 30px;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.7);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .open-button:hover {
+      background-color: white;
+      color: black;
+      transform: scale(1.05);
+    }
+
+    .star-wars {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      text-align: justify;
+      color: #ffe81f;
+      font-size: 160%;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      line-height: 1.3;
+      animation: crawl 150s linear;
+      animation-play-state: paused;
+      z-index: 1;
+    }
+
+    .star-wars.active {
+      animation-play-state: running;
+    }
+
+    .star-wars h1 {
+      text-align: center;
+      font-size: 200%;
+      margin-bottom: 30px;
+      color: #ffe81f;
+    }
+
+    .star-wars h2 {
+      text-align: center;
+      font-size: 170%;
+      margin: 20px 0;
+      color: #ffe81f;
+    }
+
+    .star-wars a {
+      color: #ffe81f;
+      text-decoration: underline;
+      font-size: 170%;
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    .star-wars a:hover {
+      color: #ffcc00;
+      transform: scale(1.05);
+    }
+
+    @keyframes crawl {
+      0% {
+        top: 100%;
+        transform: translateX(-50%) rotateX(20deg);
+      }
+      100% {
+        top: -1200%;
+        transform: translateX(-50%) rotateX(25deg);
+      }
+    }
+
+    .fade {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, 
+        rgba(0,0,0,1) 0%, 
+        rgba(0,0,0,0) 15%, 
+        rgba(0,0,0,0) 85%, 
+        rgba(0,0,0,1) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .pause {
+      display: block;
+      height: 60px;
+    }
+
+    .large-pause {
+      display: block;
+      height: 200px;
+    }
+
+    .very-large-pause {
+      display: block;
+      height: 350px;
     }
   </style>
 </head>
-
 <body>
-  <div class="pane">
-    <div class="text">
-      <p>Загрузка сюрприза</p>
+  <div class="container">
+    <div class="button-container">
+      <div class="open-button" onclick="startAnimation()">Открыть сюрприз</div>
     </div>
-
-    <div class="loading_container">
-      <div class="loading_bar">
-        <div class="loading_line"></div>
-      </div>
-
-      <div class="percent">91%</div>
+    
+    <div class="fade"></div>
+    
+    <div class="star-wars" id="starwars-text">
+      <h1>Наконец-то объявляем! То, чего вы так ждали!</h1>
+      
+      <h2>Всем привет!</h2>
+      
+      Рад видеть вас на этой странице. Сейчас расскажу, зачем мы тут все собрались. Вы наверняка заметили заголовок, который заинтриговал вас.
+      <br><br>
+      Вы не просто так сюда попали. Это потому, что вам интересно, а нам есть, что рассказать. Мы долго готовили кое-что классное, и вот пришло время поделиться этим с вами.
+      <br><br>
+      <h2>Почему мы здесь?</h2>
+      Если подумать, то ваше появление на этой странице – уже маленькое событие. Вы где-то кликнули, что-то пролистали и оказались здесь. Как и я. И этот текст, который вы сейчас читаете. Мы встретились, потому что вас заинтересовало то, что мы хотим показать. Вы ждали.
+      <br><br>
+      Ожидание – это всегда интересно. Все в интернете только и делают, что ждут чего-то нового. И вот сегодня этот момент настал! Мы приготовили для вас сюрприз.
+      <br><br>
+      <h2>В чем прикол сюрприза?</h2>
+      Сюрпризы любят все! Это всегда что-то приятное и неожиданное. Хороший сюрприз готовится постепенно, как хорошее блюдо. Сначала – намек, потом – слухи, потом все начинают обсуждать это в соцсетях.
+      <br><br>
+      Вся эта подготовка – это как топливо для интереса. Без нее сюрприз был бы просто новостью. А так – это целое событие! И мы с вами вместе ждали этого момента.
+      <br><br>
+      <h2>Последние приготовления</h2>
+      Мы почти у цели! Сейчас произойдет кое-что интересное. Все, что я писал до этого – это просто подготовка к самому главному. Как музыка перед началом концерта.
+      <br><br>
+      Сейчас будет самое интересное. Вы, наверное, уже готовы нажать на кнопку или промотать страницу вниз. Сейчас узнаете, что мы для вас приготовили!
+      <br><br>
+      <h2>Что ж Показываю!</h2>
+      Хватит тянять кота за хвост! Все готово, атмосфера накалена. Переходим к делу.
+      <br><br>
+      Ради этого момента вы здесь и собрались. Все, что вам нужно сделать – это перейти по ссылке ниже. Это как ключ к двери, за которой вас ждет сюрприз.
+      <br><br>
+      <h1>Внимание! Смотрите!</h1>
+      <br>
+      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+        https://www.youtube.com/watch?v=dQw4w9WgXcQ
+      </a>
+      
+      <div class="large-pause"></div>
+      
+      <h1>ИДИТЕ НАХУЙ!!!!!!!АДИНАДИНАДИНАДИНАДИН</h1>
+      
+      <div class="very-large-pause"></div>
+      
+      <h2>Что ж, если серьёзно, то сюрприз вас уже ожидает. Давайте вместе соберемся в 17:00 по МСК, чтобы продемонстрировать сюрприз уже вживую. Буду всех ждать. Давайте, пока-пока</h2>
+      
+      <div class="pause"></div>
+      
+      <h1>А ещё: Сметана иди нахуй!!!АДИНАДИНАДИНАДИНАХУЙ</h1>
     </div>
   </div>
+
+  <script>
+    function startAnimation() {
+      const starWarsText = document.getElementById('starwars-text');
+      const button = document.querySelector('.open-button');
+      
+      button.style.display = 'none';
+      
+      starWarsText.classList.remove('active');
+      void starWarsText.offsetWidth;
+      
+      starWarsText.classList.add('active');
+    }
+  </script>
 </body>
-<!-- Сметана иди нахуй XD  --!>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
